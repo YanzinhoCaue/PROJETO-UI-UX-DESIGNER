@@ -1,74 +1,271 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Nunito+Sans:opsz,wght@6..12,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Sora:wght@300;400;600&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
 }
 
+:root {
+  --bg-deep: #2a1a14;
+  --bg-mid: #4a2f24;
+  --card-bg: rgba(29, 16, 11, 0.76);
+  --card-border: rgba(255, 220, 183, 0.16);
+  --text-main: #fff4ea;
+  --text-soft: #e9cdb9;
+  --accent: #ff8e3c;
+  --accent-strong: #ff6b00;
+  --shadow: 0 16px 48px rgba(3, 8, 12, 0.45);
+}
+
 body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 28px 16px;
+  overflow-x: hidden;
+  position: relative;
+
+  font-family: 'Sora', sans-serif;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 173, 97, 0.25), transparent 38%),
+    radial-gradient(circle at 82% 78%, rgba(255, 226, 193, 0.2), transparent 34%),
+    linear-gradient(140deg, var(--bg-deep) 0%, var(--bg-mid) 52%, #6b4433 100%);
+  background-size: 130% 130%;
+  color: var(--text-main);
+  animation: drift-bg 14s ease-in-out infinite alternate;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  width: 330px;
+  height: 330px;
+  top: -120px;
+  right: -90px;
+  background: radial-gradient(circle, rgba(255, 169, 99, 0.36) 0%, rgba(255, 169, 99, 0) 72%);
+  animation: float-one 9s ease-in-out infinite;
+}
+
+body::after {
+  width: 420px;
+  height: 420px;
+  bottom: -180px;
+  left: -120px;
+  background: radial-gradient(circle, rgba(245, 196, 150, 0.3) 0%, rgba(245, 196, 150, 0) 70%);
+  animation: float-two 11s ease-in-out infinite;
+}
+
+.profile-card {
+  width: min(520px, 100%);
+  padding: 34px 28px 30px;
+  border-radius: 28px;
+  border: 1px solid var(--card-border);
+  background:
+    linear-gradient(125deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01) 40%),
+    var(--card-bg);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+  animation: rise-in 700ms ease-out;
+}
+
+.profile-header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
-  background-color: #363333;
-
-  font-family: 'Nunito Sans', sans-serif;
 }
 
 img {
-  margin-top: 32px;
-  width: 128px;
-  height: 128px;
+  width: 142px;
+  height: 142px;
 
   border-radius: 100%;
-  border: 3px solid #F6E9E9;
-  padding: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  padding: 5px;
+  background: linear-gradient(140deg, rgba(255, 142, 60, 0.8), rgba(255, 107, 0, 0.65));
+  box-shadow: 0 10px 30px rgba(1, 8, 13, 0.45);
 
   object-fit: cover;
+
+  animation: pop-in 800ms 120ms both;
 }
 
 h1 {
-  font-family: 'Caveat', cursive;
-  font-weight: bold;
-  font-size: 40px;
+  margin-top: 16px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  letter-spacing: 0.02em;
 
-  color: #F6E9E9;
+  color: var(--text-main);
+
+  animation: rise-in 800ms 220ms both;
 }
 
 svg {
-  margin: 8px;
+  margin: 10px 0 12px;
+
+  animation: rise-in 800ms 300ms both;
 }
 
-span {
-  color: #A19090;
+.profile-header svg circle {
+  transform-origin: center;
+  animation: dot-pulse 1.2s ease-in-out infinite;
+}
 
-  margin-bottom: 32px;
+.profile-header svg circle:nth-child(2) {
+  animation-delay: 0.16s;
+}
 
-  font-size: 20px;
+.profile-header svg circle:nth-child(3) {
+  animation-delay: 0.32s;
+}
+
+.profile-header svg circle:nth-child(4) {
+  animation-delay: 0.48s;
+}
+
+p {
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.86rem;
+  font-weight: 600;
+
+  margin-bottom: 30px;
+
+  animation: rise-in 800ms 360ms both;
+}
+
+.profile-links {
+  display: grid;
+  gap: 14px;
 }
 
 a {
-  border: 3px solid;
-  border-radius: 100px;
-  
-  width: 280px;
-  height: 60px;
-  margin-bottom: 24px;
-  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 14px;
+  width: 100%;
+  padding: 16px 20px;
 
   text-align: center;
   text-transform: uppercase;
-  font-size: 20px;
+  letter-spacing: 0.11em;
+  font-size: 0.92rem;
   font-weight: 600;
-  color: #E16428;
+  color: var(--text-main);
 
-  box-shadow: 0px 2px 6px 0px #27212180;
+  background:
+    linear-gradient(120deg, rgba(255, 142, 60, 0.25), rgba(255, 142, 60, 0.06)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 20px rgba(1, 7, 11, 0.3);
 
-  transition: .5s;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
+
+  animation: rise-in 800ms 460ms both;
 }
+
 a:hover {
-  background-color: #E16428;
-  color: #F6E9E9;
+  transform: translateY(-2px);
+  border-color: rgba(255, 142, 60, 0.7);
+  background:
+    linear-gradient(120deg, rgba(255, 142, 60, 0.7), rgba(255, 107, 0, 0.55));
+  box-shadow: 0 14px 26px rgba(255, 107, 0, 0.22);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes dot-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0) scale(1);
+  }
+  45% {
+    opacity: 1;
+    transform: translateY(-0.7px) scale(1.28);
+  }
+}
+
+@keyframes drift-bg {
+  from {
+    background-position: 0% 0%, 100% 100%, 50% 50%;
+  }
+  to {
+    background-position: 12% 8%, 88% 92%, 46% 54%;
+  }
+}
+
+@keyframes float-one {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-18px, 14px, 0) scale(1.05);
+  }
+}
+
+@keyframes float-two {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(20px, -16px, 0) scale(1.04);
+  }
+}
+
+@media (max-width: 520px) {
+  body {
+    padding: 18px 12px;
+  }
+
+  .profile-card {
+    border-radius: 22px;
+    padding: 24px 16px 20px;
+  }
+
+  p {
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+  }
+
+  a {
+    padding: 14px 14px;
+    font-size: 0.82rem;
+  }
 }
